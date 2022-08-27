@@ -1,45 +1,244 @@
-.App {
+.main {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.MuiAutocomplete-paper {
+  background-color: transparent !important;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-button {
+  display: none;
+}
+
+::-webkit-scrollbar-track-piece {
+  background-color: #848383;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #4b4b4b;
+}
+
+.top {
+  width: 100%;
+  height: 90px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.top > .title {
+  font-size: 27px;
+  width: 100%;
+  height: 25px;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.top > .title > .text {
   position: absolute;
-  top: 0px;
-  bottom: 0px;
-  left: 0px;
-  right: 0px;
-  text-align: center;
-  height: 100%;
+}
+.top > .title > .graph {
+  position: absolute;
+  background-color: #707070;
+  right: 0;
+  margin-right: 50px;
+}
+
+/* .top > .day > .graph {
+  background-color: #707070;
+  position: fixed;
+  top: 0;
+  right: 0;
+  margin-right: 55px;
+  margin-top: 28px;
+} */
+.top > .day {
+  font-size: 15px;
+  color: #707070;
+  /* display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: max-content;
+  height: max-content; */
+}
+
+/* .top > .day > .text {
+  margin-left: 8px;
+} */
+
+.main > .content {
+  width: 100%;
+  height: 422px;
+}
+
+/* #649E32 */
+
+/* item */
+/* <div className="item">
+<div className="header">
+  <div className="left">{props.hour} AM</div>
+
+  <div className="right">
+    <CloseIcon
+      sx={{
+        color: 'white',
+        width: '16px',
+        height: '16px',
+      }}
+    />
+    <EditIcon
+      sx={{
+        color: 'white',
+        width: '16px',
+        height: '16px',
+      }}
+    />
+  </div>
+</div>
+<div className="content">
+  <TextField
+    id="standard-basic"
+    label="Standard"
+    variant="standard"
+    inputProps={{
+      autoComplete: 'off',
+    }}
+  />
+</div>
+<div className="footer">
+  <KeyboardArrowDownIcon
+    sx={{
+      color: 'white',
+      width: '16px',
+      height: '16px',
+    }}
+  />
+</div>
+</div> */
+
+.item-disabled {
+  color: #3f3f3f;
+  margin-bottom: 15px;
+  user-select: none;
+  font-family: Segoe UI Regular;
+  font-size: 16px;
+  height: max-content;
+  box-sizing: border-box;
   padding: 10px;
-  background-color: #282c34;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
 }
 
-.App-logo {
-  height: 30vmin;
-  pointer-events: none;
+.item-disabled > div {
+  color: #3f3f3f;
+}
+.a {
+  color: #3d3d3d;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.item-disabled > .left > .task {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 320px;
 }
 
-.App-header {
-  height: 100%;
+.item {
+  width: 100%;
+  height: max-content;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  align-items: center;
+  box-sizing: border-box;
+  padding: 10px 10px 0px 10px;
+  border-radius: 5px;
+  min-height: 120px;
+}
+
+.item > .sub-item {
+  width: 100%;
+  height: max-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.item > .sub-item > .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  width: 100%;
+  color: white;
+  font-size: 16px;
+}
+
+.item > .sub-item > .header > .right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: max-content;
+  height: max-content;
+}
+.item > .sub-item > .header > .left {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: max-content;
+  height: max-content;
+  flex-direction: row;
+}
+
+.item > .sub-item > .content {
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.item > .sub-item > .content > input {
+  width: 100%;
+  box-sizing: border-box;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #c7c7c7;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.item > .sub-item > .content > input::placeholder {
+  color: #c7c7c7;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.item > .sub-item > .footer {
+  margin-bottom: 5px;
 }
+
+/* .item > .content {
+  background-color: purple;
+  width: max-content;
+} */
