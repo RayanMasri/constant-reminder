@@ -1,8 +1,120 @@
-.OptionsContainer {
-  width: 100%;
-  height: 50vh;
-  font-size: 2rem;
+.app {
+  background-color: #272727;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding-left: 33px;
+  padding-right: 33px;
+  padding-top: 22px;
+  padding-bottom: 22px;
+  box-sizing: border-box;
+}
+
+.app > .top {
+  width: 100%;
+  height: max-content;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.chart-container {
+  width: 500px;
+  height: max-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.sliders > .MuiButton-root {
+  background-color: gray !important;
+  margin-right: 5px;
+  color: white;
+}
+
+.menu > .MuiPaper-root > .MuiList-root > .MuiMenuItem-root {
+  color: white;
+  font-family: Consolas;
+  text-transform: uppercase;
+  font-size: 16px;
+}
+
+.top-left-info > div {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 22px;
+  color: white;
+  width: 100%;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: Consolas;
+}
+
+.top-left-info-container > .top-left-info:not(:last-child) {
+  margin-bottom: 19px;
+}
+
+/* <div className="info">
+<div className="value">350</div>
+<div className="label">viewpoints received</div>
+</div>
+<div className="info">
+<div className="value">350</div>
+<div className="label">viewpoints received</div>
+</div>
+<div className="info">
+<div className="value">350</div>
+<div className="label">viewpoints received</div>
+</div> */
+.progress-cluster {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 266.5px;
+  height: max-content;
+}
+
+.progress-cluster > .info-group {
+  width: max-content;
+  height: max-content;
+}
+
+.progress-cluster > .info-group > .info {
+  font-family: Consolas;
+  font-size: 19px;
+  text-transform: uppercase;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: max-content;
+  color: #636363;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.progress-cluster > .info-group > .info > .label {
+  width: 110px;
+}
+
+.progress-cluster > .info-group > .info > .value {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.progress-cluster > .info-group > .info > .value > .number {
+  margin-left: 10px;
 }

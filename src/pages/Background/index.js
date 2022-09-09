@@ -225,6 +225,14 @@ const showFreetime = async (id) => {
   });
 };
 
+const getDefaultAnswerObject = () => {
+  return {
+    answerDate: new Date().toLocaleString('en-US'),
+    answerTo: '',
+    answer: null,
+  };
+};
+
 // Refactored
 chrome.notifications.onButtonClicked.addListener(async (id, index) => {
   let { items } = await chrome.storage.local.get('items');
@@ -233,46 +241,129 @@ chrome.notifications.onButtonClicked.addListener(async (id, index) => {
     items.map(async (item) => {
       if (item.id != id) return item;
 
+      // If decision is not taken, means the value is the answer, otherwise what was set
+      let completed = item.completed == null ? index == 0 : item.completed;
+
+      // If completion decision was taken, means the value is the answer, otherwise what was set
+      let productive = item.completed != null ? index == 0 : item.productive;
+
+      let skipped = false; // Prevents infinite notifications
+
       // Add to history
-      let answer = {
-        ...item,
-        answerDate: new Date().toLocaleString('en-US'),
-        answerTo: '',
-        answer: null,
-      };
+      let answers = [];
+      let defaultAnswer = getDefaultAnswerObject();
+
+      // {
+      //   "answer": false,
+      //   "answerDate": "8/29/2022, 3:22:14 PM",
+      //   "answerTo": "productive",
+      //   "completed": true,
+      //   "hours": ["10:00"],
+      //   "id": "051e7066-9be1-4c00-941b-431183951fe9",
+      //   "productive": null,
+      //   "skipped": false,
+      //   "task": "aisjo",
+      //   "time": "8/27/2022, 10:00:00"
+      // },
 
       // If completed decision was not taken, means notification was completed decision
       if (item.completed == null) {
-        answer.answerTo = 'completed';
-        answer.answer = index == 0;
+        answers.push({
+          ...defaultAnswer,
+          answerTo: 'completed',
+          answer: index == 0,
+          completed: completed,
+          productive: productive,
+        });
+
         // If answer was yes, ask productivity
         if (index == 0) {
           askProductive(item.id, item.task, item.hours);
         } else {
-          // Otherwise, show freetime
+          // Otherwise, show freetime, and add productive as false
+          answers.push({
+            ...defaultAnswer,
+            answerTo: 'productive',
+            answer: false,
+            completed: false,
+            productive: false,
+            skipped: true,
+          });
+          skipped = true;
+
           showFreetime(item.id);
         }
       } else {
         // If completed decision was taken, means notification was productivity decision
-        answer.answerTo = 'productive';
-        answer.answer = index == 0;
+        console.log(`Pushed productive`);
+
+        answers.push({
+          ...defaultAnswer,
+          answerTo: 'productive',
+          answer: index == 0,
+          completed: completed,
+          productive: productive,
+          skipped: true,
+        });
+        skipped = true;
+
+        console.log(answers);
+        console.log(defaultAnswer);
 
         // Show freetime
         showFreetime(item.id);
       }
 
+      // let clone = structuredClone(item);
+
+      // item.completed = clone.completed == null ? index == 0 : clone.completed;
+      // item.productive =
+      //   clone.completed != null
+      //     ? !clone.completed
+      //       ? false
+      //       : index == 0
+      //     : clone.productive;
+
+      // answer = {
+      //   ...item,
+      //   ...answer,
+      // };
+      // answers.push(answer);
+
+      // {
+      //   "answer": false, +
+      //   "answerDate": "8/29/2022, 3:22:14 PM", +
+      //   "answerTo": "productive", +
+      //   "completed": true, *
+      //   "hours": ["10:00"], -
+      //   "id": "051e7066-9be1-4c00-941b-431183951fe9", -
+      //   "productive": null, *
+      //   "skipped": false, -
+      //   "task": "aisjo", -
+      //   "time": "8/27/2022, 10:00:00" -
+      // },
+
       // Push item to history and save
       let { history } = await chrome.storage.local.get('history');
       if (!history) history = [];
-      history.push(answer);
+      for (let answer of answers) {
+        console.log({
+          ...item,
+          ...answer,
+        });
+        history.push({
+          ...item,
+          ...answer,
+        });
+      }
       chrome.storage.local.set({ history: history });
 
       // Return item with updated variables
       return {
         ...item,
-        completed: item.completed == null ? index == 0 : item.completed,
-        productive: item.completed != null ? index == 0 : item.productive,
-        skipped: item.completed == null && index == 1,
+        completed: completed,
+        productive: productive,
+        skipped: skipped,
       };
     })
   );

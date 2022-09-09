@@ -135,7 +135,7 @@ export default function Item(props) {
               renderInput={(params) => (
                 <TextField
                   {...params}
-                  label="freeSolo"
+                  label="Task"
                   size="small"
                   InputLabelProps={{
                     ...params.InputLabelProps,
