@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './Options.css';
 import 'chart.js/auto';
 import { Chart } from 'react-chartjs-2';
-import 'chartjs-adapter-date-fns';
+// import 'chartjs-adapter-date-fns';
 import { getParsedTime } from '../../utility.js';
 
 export default function Options(props) {

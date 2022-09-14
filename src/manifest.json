@@ -17,5 +17,12 @@
     }
   ],
   "host_permissions": ["<all_urls>"],
-  "permissions": ["notifications", "storage", "alarms", "tabs", "scripting"]
+  "permissions": [
+    "notifications",
+    "storage",
+    "alarms",
+    "tabs",
+    "scripting",
+    "contextMenu"
+  ]
 }

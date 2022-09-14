@@ -13,8 +13,6 @@ import {
   minutesToTime,
   getLongDay,
 } from '../../utility.js';
-import GraphicEqRoundedIcon from '@mui/icons-material/GraphicEqRounded';
-import IconButton from '@mui/material/IconButton';
 
 // Show next task after asking for productiviity and completion, or show remaining tasks ?
 // Should the user be reminded after not completing the task ?
@@ -160,21 +158,6 @@ const Popup = () => {
         {/* <img src={require('../../assets/img/icon-34.png')}></img> */}
         <div className="title">
           <div className="text">What's your schedule today?</div>
-          <IconButton
-            className="graph"
-            sx={{
-              width: '20px',
-              height: '20px',
-              color: 'white',
-            }}
-          >
-            <GraphicEqRoundedIcon
-              sx={{
-                width: '18px',
-                height: '18px',
-              }}
-            />
-          </IconButton>
         </div>
         <div className="day">{getLongDay()}</div>
       </div>
